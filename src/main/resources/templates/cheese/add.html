@@ -7,7 +7,10 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <form method="post">
+    <label>Cheese type</label>
     <input type="text" name="cheeseName" />
+    <label>Description</label>
+    <input textbox="text" name="description" />
     <input type="submit" value="Add Cheese" />
 </form>
 
