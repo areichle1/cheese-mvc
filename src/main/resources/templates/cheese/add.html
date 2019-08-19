@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1 th:text="${title}">Default Title</h1>
+
 
 <nav th:replace="fragments :: navigation"></nav>
 
 <form method="post">
+    <h1 th:text="${title}">Default Title</h1>
     <label>Cheese type</label>
     <input type="text" name="cheeseName" />
     <label>Description</label>
