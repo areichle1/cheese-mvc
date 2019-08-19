@@ -9,16 +9,11 @@
     <form class="form" method="post">
         <h3 th:text="${title}">Default Title</h3>
 
-        <label class="form-label" for="cheese">Cheese</label>
-
-        <label th:each="cheese : ${cheeses}">
-            <span th:text="${cheese.key}"></span>
-            <input type="checkbox" th:value="${cheese.key}" name="cheeses" />
-        </label>
-
-        <!--<select name="cheeseKey">-->
-        <!--    <option th:each="cheese : ${cheeses}" th:value="${cheese.key}" th:text="${cheese.key}"></option>-->
-        <!--</select>-->
+        <select name="cheeseIndex">
+            <option th:each="cheese,iter : ${cheeses}"
+                    th:value="${iter.index}" th:text="${cheese.name}">
+            </option>
+        </select>
 
         <input class="form-btn" type="submit" value="Remove Cheese" />
     </form>
