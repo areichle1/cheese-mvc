@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--@todo 3: add cheese/edit form by copying add.html-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label for="name-field">Name</label>
+        <!--    @todo add value field with cheese value on form-->
+        <input class="form-control" id="name-field" th:value="${cheese.name}" type="text" name="name" />
+    </div>
+    <div class="form-group">
+        <label for="desc-field">Description</label>
+        <!--    @todo add value field with cheese value on form-->
+        <input class="form-control" th:value="${cheese.description}" id="desc-field" type="text" name="description" />
+    </div>
+    <!--    @todo add hidden field on form-->
+    <input type="hidden" th:value="${cheese.cheeseId}" name="cheeseId" />
+    <input type="submit" value="Edit Cheese" />
+</form>
+
+</body>
+</html>

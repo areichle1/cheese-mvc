@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <nav th:replace="fragments :: navigation"></nav>
 
@@ -9,11 +9,11 @@
     <form class="form" method="post">
         <h3 th:text="${title}">Default Title</h3>
 
-        <select name="cheeseIndex">
-            <option th:each="cheese,iter : ${cheeses}"
-                    th:value="${iter.index}" th:text="${cheese.name}">
-            </option>
-        </select>
+        <div th:each="cheese : ${cheeses}" class="checkbox">
+            <input type="checkbox" name="cheeseIds" th:value="${cheese.cheeseId}" th:id="${cheese.cheeseId}"/>
+            <label th:for="${cheese.cheeseId}" th:text="${cheese.name}"></label>
+            <br />
+        </div>
 
         <input class="form-btn" type="submit" value="Remove Cheese" />
     </form>
