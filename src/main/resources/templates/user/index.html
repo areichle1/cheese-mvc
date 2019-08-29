@@ -1,0 +1,14 @@
+<!--@todo add user index template-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<!--@todo greet the user once they are successfully validated-->
+<p th:text="'Welcome ' + ${user.username} + '!'">Welcome user!</p>
+
+</body>
+</html>

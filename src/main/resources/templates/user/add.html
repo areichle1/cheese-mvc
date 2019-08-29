@@ -1,0 +1,35 @@
+<!--@todo add user add template-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<!--@todo add form with name attributes that map to fields on user class-->
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label for="name-field">Username</label>
+        <input class="form-control" th:value="${user.username}" id="name-field" type="text" name="username" />
+    </div>
+    <div class="form-group">
+        <label for="email-field">email</label>
+        <input class="form-control" th:value="${user.email}" id="email-field" type="text" name="email" />
+    </div>
+    <div class="form-group">
+        <label for="password-field">Password</label>
+        <input class="form-control" id="password-field" type="password" name="password" />
+    </div>
+    <div class="form-group">
+        <label for="verify-password-field">Verify Password</label>
+        <input class="form-control" id="verify-password-field" type="password" name="verify_password" />
+    </div>
+    <!--@todo add location for error message to show if password and verify password don't match-->
+    <p th:if="${error_message}" style="color:red;" th:text="${error_message}"></p>
+
+    <input type="submit" value="add user" />
+</form>
+
+</body>
+</html>
