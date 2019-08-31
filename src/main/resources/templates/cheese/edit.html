@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--@todo 3: add cheese/edit form by copying add.html-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
@@ -7,19 +6,37 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" style="max-width:600px;">
+<!--    @TODO refactor for to use th:object-->
+<form method="post" style="max-width:600px;" th:object="${cheese}">
     <div class="form-group">
-        <label for="name-field">Name</label>
-        <!--    @todo add value field with cheese value on form-->
-        <input class="form-control" id="name-field" th:value="${cheese.name}" type="text" name="name" />
+        <!--    @TODO use th:field and th:for in place of what was here previously-->
+        <label th:for="*{name}">Name</label>
+        <input class="form-control" type="text" th:field="*{name}" />
+        <span th:errors="*{name}" class="error" style="color:red;"></span>
     </div>
     <div class="form-group">
-        <label for="desc-field">Description</label>
-        <!--    @todo add value field with cheese value on form-->
-        <input class="form-control" th:value="${cheese.description}" id="desc-field" type="text" name="description" />
+        <label th:for="description">Description</label>
+        <!--    @todo use th:field and th:for in place of what was here previously-->
+        <input class="form-control" type="text" th:field="*{description}" />
+        <span th:errors="*{description}" class="error" style="color: red;"></span>
     </div>
-    <!--    @todo add hidden field on form-->
-    <input type="hidden" th:value="${cheese.cheeseId}" name="cheeseId" />
+    <div class="form-group">
+        <label th:for="type">Type</label>
+        <!--    @TODO use th:field and th:for in place of what was here previously-->
+        <select class="form-control" type="text" th:field="*{type}">
+            <option th:each="type : ${cheeseType}" th:value="${type}" th:text="${type.name}"></option>
+        </select>
+        <span th:errors="*{type}" class="error" style="color: red;"></span>
+    </div>
+    <div class="form-group">
+        <label th:for="*{rating}">Rating</label>
+        <select class="form-control" th:field="*{rating}">
+            <option th:each="rating : ${ratingOptions}" th:value="${rating}" th:text="${rating.stars}"></option>
+        </select>
+        <span th:errors="*{rating}" class="error" style="color: red;"></span>
+    </div>
+
+    <input type="hidden" th:field="${cheeseId}" />
     <input type="submit" value="Edit Cheese" />
 </form>
 

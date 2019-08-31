@@ -3,6 +3,7 @@ package org.launchcode.cheesemvc.controllers;
 import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.launchcode.cheesemvc.models.CheeseType;
+import org.launchcode.cheesemvc.models.Rating;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -30,8 +31,9 @@ public class CheeseController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Cheese");
-        model.addAttribute(new Cheese());
-        model.addAttribute("cheeseTypes", CheeseType.values());
+        model.addAttribute("cheese", new Cheese());
+        model.addAttribute("cheeseType", CheeseType.values());
+        model.addAttribute("ratingOptions", Rating.values());
         return "cheese/add";
     }
 
@@ -41,6 +43,8 @@ public class CheeseController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("cheeseType", CheeseType.values());
+            model.addAttribute("ratingOptions", Rating.values());
             return "cheese/add";
         }
 
@@ -65,21 +69,30 @@ public class CheeseController {
         return "redirect:";
     }
 
-    // @TODO: Stub out two handler methods in CheeseController
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int cheeseId) {
         Cheese cheese = CheeseData.getById(cheeseId);
 
         model.addAttribute("cheese", CheeseData.getById(cheeseId));
+        model.addAttribute("cheeseType", CheeseType.values());
+        model.addAttribute("ratingOptions", Rating.values());
         model.addAttribute("title", "Edit Cheese " + cheese.getName() + " (id=" + cheese.getCheeseId() + ")");
         return "cheese/edit";
     }
 
     @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
-    public String processEditForm(int cheeseId, String name, String description) {
-        Cheese cheese = CheeseData.getById(cheeseId);
-        cheese.setDescription(description);
-        cheese.setName(name);
+    public String processEditForm(@ModelAttribute @Valid Cheese cheese, Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Edit Cheese");
+            model.addAttribute("cheese", cheese);
+            model.addAttribute("cheeseType", CheeseType.values());
+            model.addAttribute("ratingOptions", Rating.values());
+            return "cheese/edit";
+        }
+
+        Cheese oldCheese = CheeseData.getById(cheese.getCheeseId());
+        CheeseData.getAll().set(CheeseData.getAll().indexOf(oldCheese), cheese);
 
         return "redirect:/cheese";
     }

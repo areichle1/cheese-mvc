@@ -3,11 +3,12 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
+<h1 th:text="${title}">Default Title</h1>
+
 <nav th:replace="fragments :: navigation"></nav>
 
 <div class="flex">
     <form class="form" method="post">
-        <h3 th:text="${title}">Default Title</h3>
 
         <div th:each="cheese : ${cheeses}" class="checkbox">
             <input type="checkbox" name="cheeseIds" th:value="${cheese.cheeseId}" th:id="${cheese.cheeseId}"/>

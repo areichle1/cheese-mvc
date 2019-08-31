@@ -1,7 +1,6 @@
 package org.launchcode.cheesemvc.models;
 
 public enum CheeseType {
-
     HARD ("Hard"),
     SOFT ("Soft"),
     FAKE ("Fake");
@@ -12,8 +11,6 @@ public enum CheeseType {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
 }
