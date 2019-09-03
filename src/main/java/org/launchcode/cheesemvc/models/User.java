@@ -1,9 +1,25 @@
 package org.launchcode.cheesemvc.models;
 
+
+import javax.validation.constraints.Email;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User {
+    //@todo Username and password are required (they can't be empty)
+    //@todo Username is between 5 and 15 characters
+    @NotNull
+    @Size(min = 5, max = 15, message = "Please enter a username. Username must not be blank.")
     private String username;
-    private String email;
+
+    @NotNull
+    @Size(min = 1, message = "Please enter a password. Password must not be blank.")
     private String password;
+
+    //@todo If provided, the email has the format of a valid email address.
+    @Email
+    private String email = "";
 
     public User() {
     }

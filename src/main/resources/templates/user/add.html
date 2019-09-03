@@ -7,19 +7,22 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<!--@todo add form with name attributes that map to fields on user class-->
-<form method="post" style="max-width:600px;">
+<!--@todo use user object via form model binding, ensure email and password use the correct types in the type attribute-->
+<form method="post" style="max-width:600px;" th:object="${user}">
     <div class="form-group">
-        <label for="name-field">Username</label>
-        <input class="form-control" th:value="${user.username}" id="name-field" type="text" name="username" />
+        <label th:for="*{username}">Username</label>
+        <input class="form-control" type="text" th:field="*{username}" />
+        <span th:errors="*{username}" class="error" style="color: red;"></span>
     </div>
     <div class="form-group">
-        <label for="email-field">email</label>
-        <input class="form-control" th:value="${user.email}" id="email-field" type="text" name="email" />
+        <label th:for="*{email}">email</label>
+        <input class="form-control" type="email" th:field="*{email}" />
+        <span th:errors="*{email}" class="error"  style="color: red;"></span>
     </div>
     <div class="form-group">
-        <label for="password-field">Password</label>
-        <input class="form-control" id="password-field" type="password" name="password" />
+        <label th:for="*{password}">Password</label>
+        <input class="form-control" type="password" th:field="*{password}" />
+        <span th:errors="*{password}" class="error" style="color: red;"></span>
     </div>
     <div class="form-group">
         <label for="verify-password-field">Verify Password</label>
