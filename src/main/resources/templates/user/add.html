@@ -1,4 +1,3 @@
-<!--@todo add user add template-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
@@ -7,7 +6,6 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<!--@todo use user object via form model binding, ensure email and password use the correct types in the type attribute-->
 <form method="post" style="max-width:600px;" th:object="${user}">
     <div class="form-group">
         <label th:for="*{username}">Username</label>
@@ -28,7 +26,7 @@
         <label for="verify-password-field">Verify Password</label>
         <input class="form-control" id="verify-password-field" type="password" name="verify_password" />
     </div>
-    <!--@todo add location for error message to show if password and verify password don't match-->
+    <!--added location for error message to show if password and verify password don't match-->
     <p th:if="${error_message}" style="color:red;" th:text="${error_message}"></p>
 
     <input type="submit" value="add user" />

@@ -17,12 +17,11 @@ public class UserController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("title", "Add User");
-        //@todo add user object so form model binding doesn't explode when you try to get the page for the first time.
         model.addAttribute("user", new User());
         return "user/add";
     }
 
-    // @todo add @valid attribute along with errors object return early if validation trips or passwords don't match
+    // added @valid attribute along with errors object, returns early if validation trips or passwords don't match
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid User user, Errors errors, String verify_password) {
         model.addAttribute("user", user);
